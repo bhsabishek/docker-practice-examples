@@ -1,0 +1,1 @@
+Below are the steps and debugging done for the application to go into container
