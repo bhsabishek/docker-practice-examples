@@ -7,6 +7,8 @@ services:
       - "5000:5000"
     depends_on:
       - db
+    networks:
+      - mern_network
     environment:
       - DB_HOST=db
       - DB_USER=root
@@ -16,12 +18,18 @@ services:
   db:
     image: mysql:8.0
     restart: always
+    networks:
+      - mern_network
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: user_db
     volumes:
       - db_data:/var/lib/mysql
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+networks:
+  mern_network:
+    driver: bridge 
 
 volumes:
   db_data:

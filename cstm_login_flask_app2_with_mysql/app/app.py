@@ -1,16 +1,25 @@
 from flask import Flask, render_template, request, redirect
 import mysql.connector
+import time
 
 app = Flask(__name__)
 
 # MySQL Configuration
-db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="your_password",
-    database="user_db"
-)
-cursor = db.cursor()
+for i in range(10):
+        try:
+            db = mysql.connector.connect(
+                host="db",
+                user="root",
+                password="yourpassword",
+                database="yourdatabase"
+            )
+            print("Connected to database")
+            cursor = db.cursor()  # Create a cursor object
+            return db, cursor
+        except Error as e:
+            print(f"Attempt {i+1}: Unable to connect, retrying in 3 seconds...")
+            time.sleep(3)
+    raise Exception("Could not connect to the database after several attempts")
 
 @app.route('/')
 def home():
