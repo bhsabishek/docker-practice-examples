@@ -10,8 +10,8 @@ for i in range(10):
             db = mysql.connector.connect(
                 host="db",
                 user="root",
-                password="yourpassword",
-                database="yourdatabase"
+                password="root",
+                database="user_db"
             )
             print("Connected to database")
             cursor = db.cursor()  # Create a cursor object
